@@ -54,7 +54,9 @@ const Login = () => {
         <button type="submit" className="button primary" disabled={submitting}>
           {submitting ? 'Logging in...' : 'Login'}
         </button>
+
       </form>
+
       <p className="muted-text">
         Don't have an account? <Link to="/register">Register here</Link>.
       </p>

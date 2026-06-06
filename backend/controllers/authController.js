@@ -52,9 +52,12 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     // Find user
+    // NOTE: Do not log password.
+    console.log(`[auth/login] attempt email=${String(email).toLowerCase().trim()}`);
     const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
+      console.warn('[auth/login] user not found');
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
@@ -62,8 +65,10 @@ const login = async (req, res) => {
     const isMatch = await user.comparePassword(password);
 
     if (!isMatch) {
+      console.warn('[auth/login] password mismatch');
       return res.status(401).json({ message: 'Invalid email or password' });
     }
+
 
     res.json({
       _id: user._id,

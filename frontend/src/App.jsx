@@ -17,9 +17,11 @@ import EditExam from './pages/EditExam';
 import ManageQuestions from './pages/ManageQuestions';
 import AllResults from './pages/AllResults';
 import Analytics from './pages/Analytics';
+
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 import './index.css';
+
 
 function App() {
   const { user, logout } = useContext(AuthContext);
@@ -34,9 +36,11 @@ function App() {
           {!user && <Link to="/login">Login</Link>}
           {!user && <Link to="/register">Register</Link>}
           {user && <Link to="/dashboard">Dashboard</Link>}
-          {user && <Link to="/exams">Exams</Link>}
-          {user && <Link to="/results">Results</Link>}
-          {user && user.role === 'admin' && <Link to="/admin/exams">Admin</Link>}
+          {user && user.role !== 'admin' && <Link to="/exams">Exams</Link>}
+          {user && user.role !== 'admin' && <Link to="/results">Results</Link>}
+          {user && user.role === 'admin' && <Link to="/admin/exams">Exam</Link>}
+
+
           {user && (
             <button type="button" className="link-button" onClick={logout}>
               Logout
@@ -52,6 +56,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
+
           <Route
             path="/dashboard"
             element={

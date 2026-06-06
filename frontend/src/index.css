@@ -2,8 +2,22 @@
 :root {
   color-scheme: light;
   font-family: Inter, 'Segoe UI', system-ui, sans-serif;
-  background: #f8fafc;
-  color: #0f172a;
+
+  /* Blue & White only palette */
+  --blue-900: #1e3a8a;
+  --blue-800: #1d4ed8;
+  --blue-700: #2563eb;
+  --blue-600: #3b82f6;
+  --blue-100: #dbeafe;
+  --blue-50: #eff6ff;
+  --bg: #ffffff;
+  --panel: #f8fafc; /* very light neutral */
+  --text: #0b1b4a;
+  --muted: #4b6aa8;
+  --border: #bfdbfe;
+
+  background: var(--panel);
+  color: var(--text);
 }
 
 * {
@@ -17,8 +31,9 @@ html, body, #root {
 }
 
 body {
-  background: #f8fafc;
+  background: var(--panel);
 }
+
 
 button, input, select {
   font: inherit;
@@ -54,7 +69,7 @@ button {
 
 .nav-links {
   display: flex;
-  gap: 0.75rem;
+  gap: 3.50rem;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -80,11 +95,12 @@ button {
 
 .page-card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0f2fe;
   border-radius: 16px;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.08);
   padding: 2rem;
 }
+
 
 .form-card {
   max-width: 520px;
@@ -99,8 +115,9 @@ h1, h2, h3 {
 p {
   margin: 0 0 1rem;
   line-height: 1.7;
-  color: #334155;
+  color: var(--muted);
 }
+
 
 .form-grid {
   display: grid;
@@ -116,18 +133,20 @@ label {
 input,
 select {
   width: 100%;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #bfdbfe;
   border-radius: 0.75rem;
   padding: 0.95rem 1rem;
   background: #f8fafc;
   outline: none;
 }
 
+
 input:focus,
 select:focus {
   border-color: #2563eb;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
 }
+
 
 .button-row {
   display: flex;
@@ -158,16 +177,18 @@ select:focus {
 .secondary {
   background: #ffffff;
   color: #2563eb;
-  border-color: #cbd5e1;
+  border-color: #bfdbfe;
 }
+
 
 .page-card .button {
   width: 100%;
 }
 
 .muted-text {
-  color: #64748b;
+  color: var(--muted);
 }
+
 
 .toast {
   position: sticky;
@@ -180,22 +201,23 @@ select:focus {
 }
 
 .toast.success {
-  background: #ecfdf5;
-  color: #065f46;
-  border: 1px solid #a7f3d0;
+  background: #eff6ff;
+  color: var(--blue-800);
+  border: 1px solid var(--border);
 }
 
 .toast.error {
-  background: #fef2f2;
-  color: #991b1b;
-  border: 1px solid #fecaca;
+  background: #eff6ff;
+  color: var(--blue-800);
+  border: 1px solid var(--border);
 }
 
 .toast.info {
   background: #eff6ff;
-  color: #1d4ed8;
-  border: 1px solid #bfdbfe;
+  color: var(--blue-800);
+  border: 1px solid var(--border);
 }
+
 
 .loading-state {
   text-align: center;
@@ -424,12 +446,13 @@ a:hover {
 }
 
 .review-card.correct {
-  border-color: #a7f3d0;
+  border-color: #bfdbfe;
 }
 
 .review-card.incorrect {
-  border-color: #fecaca;
+  border-color: #bfdbfe;
 }
+
 
 .review-options {
   display: grid;
@@ -452,8 +475,9 @@ a:hover {
 }
 
 .review-option.correct-answer {
-  border-color: #65a30d;
+  border-color: #2563eb;
 }
+
 
 .review-option span {
   width: 1.5rem;
@@ -472,13 +496,14 @@ a:hover {
 }
 
 .error-banner {
-  background: #fef2f2;
-  color: #991b1b;
+  background: #eff6ff;
+  color: var(--blue-800);
   padding: 1rem;
   border-radius: 1rem;
-  border: 1px solid #fecaca;
+  border: 1px solid var(--border);
   margin-bottom: 1rem;
 }
+
 
 @media (max-width: 760px) {
   .exam-page .exam-header,

@@ -39,7 +39,15 @@ export const AuthProvider = ({ children }) => {
       showToast('Logged in successfully', 'success');
       return data;
     } catch (error) {
-      showToast(error.message || 'Login failed', 'error');
+      const msg =
+        error?.response?.data?.message ||
+        (Array.isArray(error?.response?.data?.errors)
+          ? error.response.data.errors.map((e) => e.msg).join(', ')
+          : null) ||
+        error?.message ||
+        'Login failed';
+
+      showToast(msg, 'error');
       throw error;
     }
   };
@@ -51,7 +59,15 @@ export const AuthProvider = ({ children }) => {
       showToast('Registration successful', 'success');
       return data;
     } catch (error) {
-      showToast(error.message || 'Registration failed', 'error');
+      const msg =
+        error?.response?.data?.message ||
+        (Array.isArray(error?.response?.data?.errors)
+          ? error.response.data.errors.map((e) => e.msg).join(', ')
+          : null) ||
+        error?.message ||
+        'Registration failed';
+
+      showToast(msg, 'error');
       throw error;
     }
   };

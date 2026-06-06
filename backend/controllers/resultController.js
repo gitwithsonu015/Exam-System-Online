@@ -63,9 +63,13 @@ const submitResult = async (req, res) => {
 
     // Populate user and exam details
     await result.populate('userId', 'name email');
-    await result.populate('examId', 'title');
+    await result.populate('examId', 'title duration');
+
+
+
 
     res.status(201).json(result);
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
