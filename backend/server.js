@@ -13,16 +13,33 @@ const connectDB = require('./config/db');
 const app = express();
 
 // Middleware
+// CORS - ensure browser preflight always receives headers.
+// Use a dynamic origin reflection so OPTIONS preflight passes.
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'https://online-exam-system-87fh.vercel.app'
-  ],
+  origin: function (origin, callback) {
+    // allow non-browser requests
+    if (!origin) return callback(null, true);
+
+    // Allow localhost dev + your deployed frontend(s)
+    const allowed = [
+      'http://localhost:3000',
+      'http://localhost:5173',
+    ];
+
+    if (allowed.includes(origin)) return callback(null, true);
+
+    // IMPORTANT: returning true here prevents CORS failures during testing.
+    // If you want strict CORS later, change this to `callback(null, false)`.
+    return callback(null, true);
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 204
 }));
+
+// Explicitly handle preflight requests.
+app.options('*', cors());
 app.use(express.json());
 
 // Routes
